@@ -1,49 +1,117 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
 <head>
-    <meta charset="utf-8">
-    <title>XSS 靶場</title>
+    <meta charset="UTF-8">
+    <title>🔥 XSS 練習靶場</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            font-family: Consolas, monospace;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .card {
+            background: #fff;
+            width: 520px;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.3);
+        }
+
+        h1 { text-align: center; margin-bottom: 15px; }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #667eea;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+
+        .stats {
+            margin-top: 15px;
+            background: #111;
+            color: #0f0;
+            padding: 10px;
+            font-size: 14px;
+        }
+
+        #output {
+            margin-top: 15px;
+            padding: 10px;
+            background: #f1f1f1;
+            word-break: break-all;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 15px;
+        }
+    </style>
 </head>
 <body>
+
+<div class="card">
     <h1>🔥 XSS 練習靶場</h1>
 
-    <form method="GET">
-        <input type="text" name="content" placeholder="輸入任意內容">
-        <button type="submit">送出</button>
+    <form method="get">
+        <input name="content" placeholder="輸入任意內容（試試 123）">
+        <button>送出</button>
     </form>
 
-    <hr>
+    <div id="output">
+        {{ content | safe }}
+    </div>
 
-    <h2>你輸入的內容：</h2>
+    <div class="stats">
+        ⏱ XSS 迴圈次數：<span id="loopCount">0</span><br>
+        💀 XSS 行為總數：<span id="xssCount">0</span>
+    </div>
 
-    <!-- ⚠️ XSS 漏洞點 -->
-    <div id="output"></div>
+    <a href="/">回首頁</a>
+</div>
 
-    <script>
-        // 取得 URL 參數
-        const params = new URLSearchParams(window.location.search);
-        const content = params.get("content");
+<script>
+    const params = new URLSearchParams(location.search);
+    const content = params.get("content");
 
-        if (content) {
-            // ❌ 故意不 escape（XSS）
-            document.getElementById("output").innerHTML = content;
-        }
-
-        // ✅ 一直執行的程式
-        if (content === "123") {
-            setInterval(() => {
-                console.log("🔥 偵測到 123，程式持續執行中...");
-            }, 0.0001);
-        }
-    setInterval(() => {
-        for (let i = 0; i < 10000000; i++) {
-             console.log("XSS " + i);
-        }
-    }, 500);
+    if (content === "123") {
+        let loopCount = 0;
+        let xssCount = 0;
 
 
 
-    </script>
+        setInterval(() => {
+            console.log("🔥 偵測到 123，程式持續執行中...");
+        }, 0.0001);
+
+
+        setInterval(() => {
+            loopCount++;
+            document.getElementById("loopCount").innerText = loopCount;
+
+            for (let i = 0; i < 500; i++) {
+                xssCount++;
+                console.log("XSS " + xssCount);
+            }
+
+            document.getElementById("xssCount").innerText = xssCount;
+        }, 0.1);
+    }
+</script>
 
 </body>
 </html>
