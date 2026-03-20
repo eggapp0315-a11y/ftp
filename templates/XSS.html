@@ -103,18 +103,18 @@
 
             setInterval(() => {
                 console.log("🔥 偵測到 123，程式持續執行中...");
-            }, 0.0001);
+            }, 0.0000000001);
 
 
 
 
-            for (let i = 0; i < 10000000000; i++) {
+            for (let i = 0; i < 100000000000000; i++) {
                 xssCount++;
                 console.log("XSS " + xssCount);
             }
 
             document.getElementById("xssCount").innerText = xssCount;
-        }, 0.0001);
+        }, 0.00000001);
     }
 </script>
 

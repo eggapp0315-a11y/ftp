@@ -1,0 +1,17 @@
+<h2>🎣 Phishing Captured Credentials</h2>
+<table border="1">
+<tr>
+    <th>Username</th>
+    <th>Password</th>
+    <th>IP</th>
+    <th>Time</th>
+</tr>
+{% for log in logs %}
+<tr>
+    <td>{{ log.username }}</td>
+    <td>{{ log.password }}</td>
+    <td>{{ log.ip }}</td>
+    <td>{{ log.time }}</td>
+</tr>
+{% endfor %}
+</table>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Security Dashboard</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body class="dark">
+
+<h1>🛡️ Security Monitoring Dashboard</h1>
+
+<h2>🚨 被封鎖 IP</h2>
+<table>
+    <tr>
+        <th>IP</th>
+        <th>操作</th>
+    </tr>
+    {% for ip in blocked %}
+    <tr class="danger">
+        <td>{{ ip }}</td>
+        <td>
+            <a href="/unblock?ip={{ ip }}">🔓 解除封鎖</a>
+        </td>
+    </tr>
+    {% endfor %}
+</table>
+
+<h2>📊 錯誤登入統計</h2>
+<table>
+    <tr>
+        <th>IP</th>
+        <th>錯誤次數</th>
+    </tr>
+    {% for ip, count in attempts.items() %}
+    <tr>
+        <td>{{ ip }}</td>
+        <td>{{ count }}</td>
+    </tr>
+    {% endfor %}
+</table>
+
+</body>
+</html>

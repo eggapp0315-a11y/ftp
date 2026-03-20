@@ -3,78 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
-    <style>
-        body {
-            margin: 0;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            font-family: Arial, sans-serif;
-        }
 
-        .card {
-            background: white;
-            padding: 30px;
-            width: 320px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-            text-align: center;
-        }
-
-        h2 {
-            margin-bottom: 10px;
-        }
-
-        p.hint {
-            font-size: 14px;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 6px;
-            border: 1px solid #ccc;
-            font-size: 14px;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            margin-top: 15px;
-            border: none;
-            border-radius: 6px;
-            background: #667eea;
-            color: white;
-            font-size: 16px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #5563c1;
-        }
-
-        .message {
-            margin-top: 15px;
-            font-weight: bold;
-            color: #e74c3c;
-        }
-
-        .success {
-            color: #27ae60;
-        }
-
-        a {
-            display: block;
-            margin-top: 15px;
-            text-decoration: none;
-            color: #667eea;
-        }
-    </style>
+    <!-- ⭐ 引用外部CSS（關鍵） -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
 

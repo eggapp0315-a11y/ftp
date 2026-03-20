@@ -1,0 +1,42 @@
+<h1>🛡 滲透監控後台（Admin Panel）</h1>
+
+<h2>📡 訪客紀錄（visitors）</h2>
+<table border="1">
+<tr>
+    <th>IP</th>
+    <th>時間</th>
+    <th>User-Agent</th>
+</tr>
+{% for v in visitors %}
+<tr>
+    <td>{{ v.ip }}</td>
+    <td>{{ v.time }}</td>
+    <td>{{ v.ua }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<hr>
+
+<h2>🚫 被封鎖 IP（blocked_ips.txt）</h2>
+<ul>
+{% for ip in blocked_file %}
+    <li style="color:red;">{{ ip }}</li>
+{% endfor %}
+</ul>
+
+<hr>
+
+<h2>⏱ 封鎖時間紀錄（blocked_time.txt）</h2>
+<table border="1">
+<tr>
+    <th>IP</th>
+    <th>封鎖時間戳</th>
+</tr>
+{% for b in block_times %}
+<tr>
+    <td>{{ b.ip }}</td>
+    <td>{{ b.time }}</td>
+</tr>
+{% endfor %}
+</table>
